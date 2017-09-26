@@ -9,3 +9,13 @@ const knex = require('knex')({
     database : settings.database,
   }
 });
+
+let input = {first_name: process.argv[2], last_name: process.argv[3], birthdate: process.argv[4]}
+
+knex('famous_people').insert(input)
+.then(console.log)
+.catch(console.error)
+
+.finally(function() {
+  knex.destroy();
+})
