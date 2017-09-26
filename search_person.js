@@ -17,3 +17,7 @@ knex.select('*').from('famous_people').timeout(1000).where({
 })
 .then(console.log)
 .catch(console.error)
+
+.finally(function() {
+  knex.destroy();
+})
