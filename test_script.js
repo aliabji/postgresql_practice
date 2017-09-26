@@ -11,14 +11,16 @@ const client = new pg.Client({
 });
 
 client.connect((err) => {
+  let text = 'SELECT * FROM famous_people WHERE last_name = ($1)'
+  let value = [process.argv[2]]
   if (err) {
     return console.error("Connection Error", err);
   }
-  client.query("SELECT $1::int AS number", ["1"], (err, result) => {
+  client.query(text, value, (err, result) => {
     if (err) {
       return console.error("error running query", err);
     }
-    console.log(result.rows[0].number); //output: 1
+    console.log(result.rows);
     client.end();
   });
 });
