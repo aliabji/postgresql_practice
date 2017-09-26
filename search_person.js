@@ -10,4 +10,10 @@ const knex = require('knex')({
   }
 });
 
-console.log("test")
+let lastName = process.argv[2]
+
+knex.select('*').from('famous_people').timeout(1000).where({
+  last_name: lastName
+})
+.then(console.log)
+.catch(console.error)
